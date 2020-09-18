@@ -2,7 +2,7 @@
 class SessionsController < ApiController
     
     # Don't do any of this if when a user is registering
-    skip_before_action :require_login, only: [:create], raise: false
+    before_action :require_login, except: [:create]
 
     # If the user enters the correct creds, give them a token.  Else, send an error.
     def create

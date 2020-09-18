@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < ApiController
     
     # Don't do any of this if when a user is registering
     before_action :require_login, except: [:create]
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     
     def user_params
         # Specify that only a user object will be accepted with these keys
-        params.require(:user).permit(:username, :email, :password, :name)
+        params.require(:user).permit(:username, :email, :password, :first_name, :last_name)
     end
 
 end

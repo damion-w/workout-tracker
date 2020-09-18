@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # Call profile method on Users class class
   get '/profile' => 'users#profile'
   
-  resources :users
+  resources :users, only: [:show, :create, :update]
+  resources :exercises, only: [:index, :show, :create]
 
 end

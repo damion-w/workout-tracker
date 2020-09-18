@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     # Fetch user
     def profile
         user = User.find_by_auth_token!(request.headers[:token])
-        render json: { user: { username: user.username, email: user.email, name: user.name } }
+        render json: user.profile_info
     end
 
     private

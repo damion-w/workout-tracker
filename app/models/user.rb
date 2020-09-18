@@ -11,6 +11,8 @@ class User < ApplicationRecord
     # https://medium.com/headerlabs-india/has-secure-token-in-rails-fb6239df7dbb
     has_secure_token :auth_token
 
+    has_many :exercises
+
     # Invalidates token (i.e. when a user logs out)
     def invalidate_token
         self.update_columns(auth_token: nil)
@@ -27,6 +29,6 @@ class User < ApplicationRecord
     end
 
     def profile_info
-        { user: { username: self.username, email: self.email, first_name: self.first_name, last_name: self.last_name}}
+        { user: { username: self.username, email: self.email, first_name: self.first_name, last_name: self.last_name, exercises: self.exercises}}
     end
 end

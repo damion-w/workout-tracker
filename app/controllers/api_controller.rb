@@ -1,5 +1,6 @@
 class ApiController < ApplicationController
-    
+      include ActionController::HttpAuthentication::Token::ControllerMethods
+
     # If the token is present and valid, proceed with login.  If not, return access denied
     def require_login
         authenticate_token || render_unauthorized("Access denied")

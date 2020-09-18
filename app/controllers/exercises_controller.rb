@@ -9,6 +9,9 @@ class ExercisesController < ApiController
     def show
         exercise = Exercise.find(params[:id])
         render json: { exercise: exercise }
+
+        # Leaving this here to remind myself that I have access to user data here
+        # render json: { exercise: exercise, username: exercise.user.username }
     end
 
     def create
@@ -24,7 +27,7 @@ class ExercisesController < ApiController
 
     private
     def exercise_params
-        params.require(:exercise).permit(:name, :set, :reps)
+        params.require(:exercise).permit(:name, :sets, :reps)
     end
 
 end

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import Auth from '../../modules/Auth'
 
 const Profile = () => {
@@ -36,6 +37,7 @@ const Profile = () => {
         ) : (
           <p>Loading...</p>
         )}
+        {!Auth.isUserAuthenticated() && <Redirect to='/login' />}
       </div>
     );
 

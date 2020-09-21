@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Link, Route } from 'react-router-dom'
 import './App.css'
 import LoginForm from './components/LoginForm'
+import Profile from './components/Users/Profile';
 
 import Auth from './modules/Auth'
 
@@ -28,32 +29,48 @@ class App extends Component {
     
     .then(res => res.json())
     .then(res => {
-      console.log(res)
+      Auth.authenticateUser(res.token)
+      this.setState({
+        auth: Auth.isUserAuthenticated(),
+        fireRedirect: true,
+        redirectPath: '/profile'
+      })
     })
   }
 
   render() {
     console.log(this.state.auth)
     
-    return(
+    return (
       <BrowserRouter>
         <div className="App">
           <h1>Exercises!</h1>
           {this.state.auth ? (
             <p>You are logged in!</p>
           ) : (
-            <p>Log in <Link to='/login'>here!</Link></p>
+            <p>
+              Log in <Link to="/login">here!</Link>
+            </p>
           )}
         </div>
 
         <Route
           exact
-          path='/login'
-          render={() => <LoginForm handleLoginSubmit={this.handleLoginSubmit} />}
+          path="/login"
+          render={() => (
+            <LoginForm handleLoginSubmit={this.handleLoginSubmit} />
+          )}
         />
+
+        <Route
+          exact
+          path="/profile"
+          component={Profile}
+        />
+
       </BrowserRouter>
     );
   }
 }
 
-export default App;
+export default App

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router-dom'
+import Auth from '../modules/Auth'
 
 const LoginForm = ({ handleLoginSubmit }) => {
     const [username, setUsername] = useState('')
@@ -23,6 +25,7 @@ const LoginForm = ({ handleLoginSubmit }) => {
         />
 
         <input type='submit' value='Log in' />
+        {Auth.isUserAuthenticated() && <Redirect push to='/profile' />}
       </form>
     )
 }

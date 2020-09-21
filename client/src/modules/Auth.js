@@ -1,6 +1,6 @@
 const Auth = {
-    authenticateToken(token) {
-        sessionStorage.setItem('token, token')
+    authenticateUser(token) {
+        sessionStorage.setItem('token', token)
     },
 
     isUserAuthenticated() {
